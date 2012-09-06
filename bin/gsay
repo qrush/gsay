@@ -9,13 +9,14 @@ begin
   sounds = words.map { |word| Tempfile.new(word) }
 
   words.each_with_index do |word, index|
+    @word = word
     url = "https://ssl.gstatic.com/dictionary/static/sounds/de/0/#{word}.mp3"
     sounds[index].write(open(url).read)
   end
 
-  words.each_with_index do |word, index|
-    `afplay #{sounds[index].path}`
-  end
+  `mpg123 -q #{sounds.map(&:path).join(" ")}`
+rescue OpenURI::HTTPError
+  abort "Couldn't gsay '#{@word}' :("
 ensure
   sounds.each do |sound|
     sound.close
