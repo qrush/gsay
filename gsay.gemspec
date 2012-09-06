@@ -9,4 +9,6 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "gsay"
   gem.require_paths = ["lib"]
+
+  gem.version = "1.0.0"
 end
