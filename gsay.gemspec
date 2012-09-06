@@ -10,5 +10,5 @@ Gem::Specification.new do |gem|
   gem.name          = "gsay"
   gem.require_paths = ["lib"]
 
-  gem.version = "1.0.0"
+  gem.version = "1.0.1"
 end
