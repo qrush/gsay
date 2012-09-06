@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require 'tempfile'
+require 'open-uri'
+
+words = ARGV.first.scan(/\w+/).map(&:downcase)
+
+begin
+  sounds = words.map { |word| Tempfile.new(word) }
+
+  words.each_with_index do |word, index|
+    url = "https://ssl.gstatic.com/dictionary/static/sounds/de/0/#{word}.mp3"
+    sounds[index].write(open(url).read)
+  end
+
+  words.each_with_index do |word, index|
+    `afplay #{sounds[index].path}`
+  end
+ensure
+  sounds.each do |sound|
+    sound.close
+    sound.unlink
+  end
+end
