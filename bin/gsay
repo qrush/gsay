@@ -1,8 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'tempfile'
-require 'open-uri'
-
 words = ARGV.first.scan(/\w+/).map(&:downcase)
 
 sounds = words.map do |word|
